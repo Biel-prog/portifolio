@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(section);
     });
 
-    // ---- NOVO CÓDIGO PARA O MENU HAMBÚRGUER ----
+    // ---- MENU HAMBÚRGUER ----
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const navLinks = document.getElementById('nav-links');
 
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburgerBtn.addEventListener('click', function() {
             navLinks.classList.toggle('active'); // Adiciona ou remove a classe .active
 
-            // Opcional: Mudar o ícone para 'X' quando o menu está aberto
+            // Mudar o ícone para 'X' quando o menu está aberto
             const icon = hamburgerBtn.querySelector('i');
             if (navLinks.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Opcional: Fechar o menu ao clicar em um link (para SPAs - não essencial aqui, mas boa prática)
+        // Fechar o menu ao clicar em um link 
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 if (navLinks.classList.contains('active')) {
