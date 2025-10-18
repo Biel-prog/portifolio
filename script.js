@@ -53,4 +53,41 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(section);
     });
 
+    // ---- NOVO CÓDIGO PARA O MENU HAMBÚRGUER ----
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navLinks = document.getElementById('nav-links');
+
+    if (hamburgerBtn && navLinks) { // Verifica se os elementos existem
+        hamburgerBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active'); // Adiciona ou remove a classe .active
+
+            // Opcional: Mudar o ícone para 'X' quando o menu está aberto
+            const icon = hamburgerBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times'); // Ícone de fechar (X)
+                hamburgerBtn.setAttribute('aria-label', 'Fechar menu');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars'); // Ícone de barras (hambúrguer)
+                hamburgerBtn.setAttribute('aria-label', 'Abrir menu');
+            }
+        });
+
+        // Opcional: Fechar o menu ao clicar em um link (para SPAs - não essencial aqui, mas boa prática)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    // Resetar ícone do botão
+                    const icon = hamburgerBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    hamburgerBtn.setAttribute('aria-label', 'Abrir menu');
+                }
+            });
+        });
+    }
+
+
 });
