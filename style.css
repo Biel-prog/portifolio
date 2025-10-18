@@ -79,21 +79,7 @@ nav ul li a:hover {
     color: var(--cor-principal);
 }
 
-.btn-nav {
-    padding: 8px 20px;
-    background-color: var(--cor-principal);
-    color: var(--cor-fundo-botao);
-    text-decoration: none;
-    font-weight: 700;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-left: 20px;
-}
-
-.btn-nav:hover {
-    background-color: #e0e0e0;
-    transform: scale(1.05);
-}
+/* Botão Currículo não está mais aqui, foi movido para dentro da UL */
 
 /* Conteúdo Principal e Seções */
 main {
@@ -246,16 +232,24 @@ h2 {
 .projeto-card a,
 .certificado-card a {
     display: inline-block;
-    margin-top: auto;
-    padding-top: 20px;
+    margin-top: auto; /* Empurra para baixo */
+    padding-top: 20px; /* Garante espaço acima */
     color: var(--cor-principal);
     text-decoration: none;
     font-weight: 700;
     transition: transform 0.3s ease;
+    align-self: flex-start; /* Evita que o link estique se for curto */
+}
+
+/* Estilo para links desativados ou futuros */
+.disabled-link {
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
 }
 
 .projeto-card a:hover,
-.certificado-card a:hover {
+.certificado-card a:hover:not(.disabled-link) { /* Não aplica hover no link desativado */
     transform: scale(1.05);
 }
 
@@ -304,9 +298,8 @@ section.visible > * {
 /* ============== RESPONSIVIDADE E MENU HAMBÚRGUER ============== */
 /* ====================================================== */
 
-/* Esconde o botão hambúrguer em telas grandes por padrão */
 #hamburger-btn {
-    display: none; /* Começa escondido */
+    display: none;
     background: none;
     border: none;
     color: var(--cor-principal);
@@ -314,38 +307,42 @@ section.visible > * {
     cursor: pointer;
 }
 
-/* --- Media Query para Telas Pequenas --- */
 @media (max-width: 820px) {
 
-    /* Esconde a lista de links horizontal e o botão de currículo */
-    nav ul,
-    .btn-nav {
+    nav ul {
         display: none;
     }
 
-    /* Mostra o botão hambúrguer */
     #hamburger-btn {
-        display: block; /* Aparece em telas pequenas */
+        display: block;
     }
 
-    /* Estiliza a lista de links QUANDO o menu estiver ativo (classe .active) */
     #nav-links.active {
-        display: flex; /* Torna a lista visível */
-        flex-direction: column; /* Links empilhados */
-        position: absolute; /* Para flutuar sobre o conteúdo */
-        top: 100%; /* Começa logo abaixo do header */
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Abaixo do header */
         left: 0;
         width: 100%;
-        background-color: rgba(30, 30, 30, 0.95); /* Fundo semi-transparente escuro */
+        background-color: rgba(30, 30, 30, 0.95);
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
         padding: 20px 0;
         border-top: 1px solid var(--cor-principal);
-        align-items: center; /* Centraliza os links */
-        gap: 15px; /* Espaço entre os links */
+        align-items: center;
+        gap: 15px;
+    }
+    
+    /* Estilo para o link do currículo no menu mobile (último item) */
+    #nav-links.active li:last-child a {
+        color: var(--cor-principal);
+        font-weight: bold;
+        border: 1px solid var(--cor-principal);
+        padding: 8px 15px;
+        border-radius: 5px;
+        margin-top: 10px;
     }
 
-    /* Ajustes opcionais para conteúdo em telas menores */
     h1 {
         font-size: 2.2rem;
     }
@@ -354,16 +351,14 @@ section.visible > * {
         font-size: 1.8rem;
     }
 
-    /* Ajuste no padding do main para garantir espaço */
     main {
-        padding-top: 100px; /* Pode precisar ajustar dependendo da altura do header */
+        padding-top: 100px;
     }
 
-    /* Garante que o grid de projetos/skills/etc vire uma coluna só */
     .experiencia-grid,
     .certificados-grid,
     .skills-grid,
     .projetos-grid {
-        grid-template-columns: 1fr; /* Força uma única coluna */
+        grid-template-columns: 1fr;
     }
 }
